@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { styles } from './styles';
+import { AppContainer } from '../../components/atoms/container';
+import { PageTitle } from '../../components/atoms/pageTitle';
+import { SectionTitle } from '../../components/atoms/sectionTitle';
+import { View } from 'react-native';
 
 export default function Home() {
   return (
-    <View style={styles.container}>
-      <Text>Hello Home</Text>
-    </View>
+    <AppContainer>
+      <PageTitle title="Hello Home"/>
+    </AppContainer>
   );
 }
