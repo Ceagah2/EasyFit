@@ -1,20 +1,23 @@
-import * as S from './styles'
-import AppIntroSlider from 'react-native-app-intro-slider'
-import { AppContainer } from '../../components/atoms/container'
-import AlongamentoMenina from '../../assets/alongamento-menina.png'
-import FuncionalMenina from '../../assets/alongamento/funcional-menina.png'
-import FuncionalMenino from '../../assets/alongamento/funcional-menino.png'
-import Treinadoras from '../../assets/alongamento/treinadoras.png'
-import { isOnboarded } from '../../store/atoms'
+import { useNavigation } from "@react-navigation/native"
 import { useAtom } from 'jotai'
+import AppIntroSlider from 'react-native-app-intro-slider'
+import AlongamentoMenina from '../../assets/alongamento-menina.png'
+import FuncionalMenina from '../../assets/funcional-menina.png'
+import FuncionalMenino from '../../assets/funcional-menino.png'
+import Treinadoras from '../../assets/treinadoras.png'
+import { isOnboardedAtom } from "../../store/atoms"
+import { colors } from '../../theme'
+import * as S from './styles'
 
 export default function IntroSlider() {
-  const [, setIsOnboarded] = useAtom(isOnboarded)
+  const [isOnboarded, setIsOnboarded] = useAtom(isOnboardedAtom)
+  console.log("isOnboarded",isOnboarded)
+  const navigator = useNavigation();
   const slides = [
     {
       key: 1,
       title: 'Alongue-se corretamente.',
-      text: 'Estique, respire, relaxe! \n Vamos começar com alongamentos que fazem você se sentir tão solto quanto um gato no sol. \nPronto para essa viagem de flexibilidade?',
+      text: 'Estique, respire, relaxe! \nVamos começar com alongamentos que fazem você se sentir tão solto quanto um gato no sol. \nPronto para essa viagem de flexibilidade?',
       image: AlongamentoMenina
     },
     {
@@ -38,38 +41,37 @@ export default function IntroSlider() {
   ];
 
   const onDone = () => {
-    return(
-      <S.DoneButton onPress={() => setIsOnboarded(true)}></S.DoneButton>
-    )
-  }
-  const onSkip = () => {
-    return(
-      <S.NextButton onPress={() => setIsOnboarded(true)}></S.NextButton>
-    )
+    setIsOnboarded(true)
+    navigator.navigate('Login')
   }
   const RenderItem = ({item}:any) => {
     return(
-      <>
+      <S.SlideContainer>
         <S.SlideImage source={item.image}/>
         <S.TextContainer>
           <S.SlideTitle>{item.title}</S.SlideTitle>
           <S.SlideText>{item.text}</S.SlideText>
         </S.TextContainer>
-      </>
+      </S.SlideContainer>
     )
   }
   return(
-    <AppContainer>
-      <S.SlideContainer>
-        <AppIntroSlider
-          data={slides}
-          renderItem={RenderItem}
-          onDone={onDone}
-          onSkip={onSkip}
-          showNextButton
-          showPrevButton
-        />
-      </S.SlideContainer>
-    </AppContainer>
+      <AppIntroSlider
+        data={slides}
+        renderItem={RenderItem}
+        onDone={onDone}
+        showNextButton
+        showPrevButton
+        dotStyle={{
+          backgroundColor: colors.white
+        }}
+        activeDotStyle={{
+          backgroundColor: colors.royalBlue
+        }}
+        nextLabel='Próximo'
+        skipLabel='Pular'
+        doneLabel='Pronto'
+        prevLabel="Anterior"
+      />
   )
 }
