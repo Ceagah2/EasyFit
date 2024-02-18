@@ -1,7 +1,12 @@
 {
-  "name": "easy-training",
-  "version": "1.0.0",
+  "name": "easy-fit",
+  "version": "0.1.0",
   "main": "node_modules/expo/AppEntry.js",
+  "author": {"name": "Carlos Henrique Ceagah", "email": "carlosceagah@gmail.com", "url": "https://github.com/Ceagah2"},
+  "license": "MIT",
+  "private": true,
+  "homepage": "./",
+  "description": "Application to make your fitness life easier, make it easy, make it easy fit. Train smart, not hard.",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -30,6 +35,5 @@
     "@types/react": "~18.2.45",
     "@types/react-native-vector-icons": "^6.4.18",
     "typescript": "^5.1.3"
-  },
-  "private": true
+  }
 }
