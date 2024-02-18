@@ -1,4 +1,4 @@
 import { atom } from 'jotai';
 
-export const isOnboarded = atom<boolean>(false)
-export const isLoggedIn = atom<boolean>(false)
+export const isOnboardedAtom = atom<boolean>(false)
+export const isLoggedInAtom = atom<boolean>(false)

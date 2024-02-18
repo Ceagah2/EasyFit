@@ -1,17 +1,17 @@
-import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { isLoggedIn, isOnboarded } from '../store/atoms';
+import { useAtomValue } from 'jotai';
+import React from 'react';
 import Home from '../screens/Home';
 import IntroSlider from '../screens/IntroSlider';
-import {  useAtomValue } from 'jotai';
 import Login from '../screens/Login';
+import { isLoggedInAtom, isOnboardedAtom } from '../store/atoms';
 
 
 const Router = () => {
   const Stack = createNativeStackNavigator();
-  const onboarded = useAtomValue(isOnboarded)
-  const loggedIn = useAtomValue(isLoggedIn)
+  const onboarded = useAtomValue(isOnboardedAtom)
+  const loggedIn = useAtomValue(isLoggedInAtom)
   const initialRoute = onboarded ? "Home" : loggedIn ? "Login" : "Intro";
 
   return(
